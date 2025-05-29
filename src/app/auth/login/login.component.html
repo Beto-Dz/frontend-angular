@@ -1,0 +1,39 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card p-4 shadow w-100" style="max-width: 400px;">
+        <h3 class="card-title text-center mb-4">Iniciar Sesión</h3>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="mb-3">
+                <label for="username" class="form-label">Nombre de usuario</label>
+                <input type="text" id="username" class="form-control" placeholder="ejemplo08" formControlName="username"
+                    [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                    <div *ngIf="f['username'].errors['required']">username es requerido</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••"
+                    formControlName="password" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                    <div *ngIf="f['password'].errors['required']">Contraseña es requerida</div>
+                    <div *ngIf="f['password'].errors['minlength']">
+                        Mínimo 6 caracteres
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <button type="submit" class="btn btn-primary">
+                    <span *ngIf="!loading">Ingresar</span>
+                    <span *ngIf="loading">Cargando...</span>
+                </button>
+            </div>
+
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
+                {{ errorMessage }}
+            </div>
+        </form>
+    </div>
+</div>
