@@ -17,3 +17,14 @@ Crear un FrontEnd con Angular en conjunto con Bootstrap
 > - Cuando se actualiza un usuario, el modal se bloquea pero sí actualiza, por lo que no es necesario pulsar el botón 'Refrescar'
 >
 > En general fue un reto bastante grande codificar en este framework a pesar de que en teoría la prueba es sencilla.
+
+>[!IMPORTANT]
+> Descargar/clonar el proyecto
+> instalar dependencias
+> ```
+> npm install
+> ```
+> Ejecutar servidor
+> ```
+> ng serve
+> ```
