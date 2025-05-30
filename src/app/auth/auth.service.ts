@@ -1,9 +1,10 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { LoginResponse } from '../interfaces/User';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
   ) {}
 
   login(username: string, password: string): Observable<LoginResponse> {
@@ -33,14 +35,31 @@ export class AuthService {
   }
 
   logout(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-    }
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const token = this.getToken();
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http.post(`${this.baseUrl}/auth/logout`, {}, { headers }).subscribe({
+      next: () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        console.log('Logout successful');
+        this.router.navigate(['/auth']);
+      },
+      error: (err) => {
+        console.error('Logout failed', err);
+      },
+    });
   }
 
   isLoggedIn(): boolean {
-    return isPlatformBrowser(this.platformId) && !!localStorage.getItem('token');
+    return (
+      isPlatformBrowser(this.platformId) && !!localStorage.getItem('token')
+    );
   }
 
   getUser() {
