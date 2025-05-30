@@ -1,0 +1,23 @@
+<button type="button" class="btn btn-danger btn-sm" [attr.data-bs-toggle]="'modal'" [attr.data-bs-target]="'#' + modalId">
+    Eliminar
+</button>
+
+<div class="modal fade" [id]="modalId" tabindex="-1" [attr.aria-labelledby]="modalId + 'Label'" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" [id]="modalId + 'Label'">Eliminar usuario {{userId}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">¿Deseas continuar con esta acción?</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+                <button type="button" class="btn btn-danger" (click)="eliminarUsuario()" data-bs-dismiss="modal">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

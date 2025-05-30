@@ -1,1 +1,20 @@
-<p>users works!</p>
+<!-- navbar debe estar fuera del container si es la barra superior -->
+<app-navbar></app-navbar>
+
+<section class="container mt-4">
+
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>Usuarios</h1>
+      <p>Lista de usuarios registrados en el sistema.</p>
+      <div class="mb-3">
+        <app-modal [mensajeBtn]="'Agregar usuario'" [modalTitle]="'Agregar usuario'"
+          [modalId]="'adduser'"></app-modal>
+      </div>
+    </div>
+  </div>
+
+
+  <app-users-table></app-users-table>
+
+</section>

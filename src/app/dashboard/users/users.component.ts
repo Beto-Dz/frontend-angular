@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
+  standalone: false,
   selector: 'app-users',
-  imports: [],
   templateUrl: './users.component.html',
-  styleUrl: './users.component.css'
+  styleUrls: ['./users.component.css'],
 })
 export class UsersComponent {
-
 }
